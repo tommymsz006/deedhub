@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  deedHubServiceUrl: 'http://localhost:23252'
 };

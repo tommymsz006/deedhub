@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { LendComponent } from './lend/lend.component';
+
+const routes: Routes = [
+  { path: 'lend', component: LendComponent },
+  { path: '', redirectTo: '/lend', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

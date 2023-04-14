@@ -1,0 +1,29 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Traits</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-expansion-panel *ngFor="let trait of traits | keyvalue">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{trait.key}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p *ngFor="let traitValue of trait.value">
+        {{traitValue}}
+      </p>
+    </mat-expansion-panel>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Competitors</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>+ APR</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Borrowers</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>+ Default</p>
+    <p>+ Duration</p>
+  </mat-expansion-panel>
+</mat-accordion>
