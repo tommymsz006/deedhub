@@ -1,0 +1,1 @@
+export const OPENSEA_SERVICE: string = 'opensea';
