@@ -96,7 +96,7 @@ const main = async () => {
   }
 
   // Step 3: cache data
-  console.log('Caching generated data to ${OUTPUT_FILE}...');
+  console.log(`Caching generated data to ${OUTPUT_FILE}...`);
   Fs.promises.writeFile(OUTPUT_FILE, JSON.stringify(listings), 'utf8');
 }
 
