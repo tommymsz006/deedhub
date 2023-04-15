@@ -9,8 +9,8 @@
         <mat-icon>{{searchDrawer.opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}</mat-icon>
       </button>
       <span class="spacer"></span>
-      <mat-slide-toggle>Actual / LTV</mat-slide-toggle>
+      <mat-slide-toggle (change)="result.changeDisplayColumn($event.checked)">Actual / LTV</mat-slide-toggle>
     </div>
-    <app-lend-result></app-lend-result>
+    <app-lend-result #result></app-lend-result>
   </mat-drawer-content>
 </mat-drawer-container>

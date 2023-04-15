@@ -4,9 +4,18 @@
   </a>
   <span>DeedHub</span>
   <span class="spacer"></span>
+  <mat-form-field appearance="outline" class="item-form-field" [formGroup]="collectionGroup">
+    <input matInput formControlName="collectionSlug" [matAutocomplete]="collectionAuto">
+    <mat-autocomplete #collectionAuto="matAutocomplete" (optionSelected)="selectSlug($event.option.value)">
+      <mat-option *ngFor="let collectionOption of collectionsAutoOptions | async" [value]="collectionOption">
+        <span>{{slugs2CollectionMetadata[collectionOption].name}}</span> | <small>{{collectionOption}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
   <button mat-icon-button color="accent" [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
   <mat-menu #menu="matMenu">
     <a mat-menu-item routerLink="/"><mat-icon>home</mat-icon>Main Page</a>
     <a mat-menu-item routerLink="/lend"><mat-icon>settings</mat-icon>Settings</a>
   </mat-menu>
+  
 </mat-toolbar>

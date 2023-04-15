@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LendComponent } from './lend/lend.component';
 
 const routes: Routes = [
-  { path: 'lend', component: LendComponent },
-  { path: '', redirectTo: '/lend', pathMatch: 'full' },
+  { path: 'lend/:slug', component: LendComponent },
+  { path: '', redirectTo: '/lend/otherdeed', pathMatch: 'full' },
 ];
 
 @NgModule({

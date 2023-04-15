@@ -15,17 +15,24 @@ export class DeedHubService {
 
   constructor(private http: HttpClient) { }
 
-  public getCollectionMetadata(): Observable<CollectionMetadata> {
-    return this.http.get<CollectionMetadata>(`${environment.deedHubServiceUrl}/api/collection`,
+  public getAllCollectionMetadata(): Observable<CollectionMetadata[]> {
+    return this.http.get<CollectionMetadata[]>(`${environment.deedHubServiceUrl}/api/collections`,
       {}).pipe(
-        catchError(DeedHubService.handleError<CollectionMetadata>('getCollectionMetadata'))
+        catchError(DeedHubService.handleError<CollectionMetadata[]>('getAllCollectionMetadata'))
       );
   }
 
-  public getListingsByCollection(): Observable<Listing[]> {
-    return this.http.get<Listing[]>(`${environment.deedHubServiceUrl}/api/listings`,
+  public getCollectionMetadataBySlug(slug: string): Observable<CollectionMetadata> {
+    return this.http.get<CollectionMetadata>(`${environment.deedHubServiceUrl}/api/collection/${slug}`,
       {}).pipe(
-        catchError(DeedHubService.handleError<Listing[]>('getListingsByCollection'))
+        catchError(DeedHubService.handleError<CollectionMetadata>('getCollectionMetadataBySlug'))
+      );
+  }
+
+  public getListingsBySlug(slug: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(`${environment.deedHubServiceUrl}/api/collection/${slug}/listings`,
+      {}).pipe(
+        catchError(DeedHubService.handleError<Listing[]>('getListingsBySlug'))
       );
   }
 

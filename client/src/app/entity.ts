@@ -1,9 +1,8 @@
 export interface CollectionMetadata {
   traits: any,
-  slug: string,
-  stats: {
-    floor: number
-  }
+  name: string,
+  primary_asset_contracts: { address: string }[],
+  slug: string
 }
 
 export interface Listing {
@@ -17,6 +16,7 @@ export interface Listing {
   highestOfferPrincipal: string | undefined,
   floorPrice: string | undefined,
   valuation: string | undefined,
+  bestOfferPrice: string | undefined,
   loanOffers: LoanOffer[]
 }
 
@@ -34,5 +34,20 @@ export interface DisplayListing {
   loanPlatform: string,
   highestOfferPrincipal: number | undefined,
   floorPrice: number | undefined,
-  valuation: number | undefined
+  valuation: number | undefined,
+  bestOfferPrice: number | undefined,
+  highestOfferPrincipalLtv: number | undefined,
+  floorPriceLtv: number | undefined,
+  valuationLtv: number | undefined,
+  bestOfferPriceLtv: number | undefined,
+  loanOffers: DisplayLoanOffer[]
+}
+
+export interface DisplayLoanOffer {
+  lender: string,
+  lenderUrl: string,
+  currency: string,
+  duration: number,
+  principal: number,
+  apr: number
 }

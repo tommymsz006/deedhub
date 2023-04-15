@@ -17,3 +17,13 @@
   box-sizing: border-box;
   gap: 5px;
 }
+
+.offer-drawer {
+  display: flex;
+  flex-flow: column;
+  min-width: 500px;
+}
+
+.offer-content {
+  width: 100%
+}
