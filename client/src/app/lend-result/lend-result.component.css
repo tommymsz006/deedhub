@@ -20,10 +20,33 @@
 
 .offer-drawer {
   display: flex;
-  flex-flow: column;
-  min-width: 500px;
+  flex-direction: column;
+  min-width: 450px;
 }
 
 .offer-content {
   width: 100%
+}
+
+.offer-form {
+  padding: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 450px;
+}
+
+.offer-form-oneliner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.lending-cursor {
+  cursor: pointer;
 }

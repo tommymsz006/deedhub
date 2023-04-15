@@ -2,6 +2,14 @@
   flex: 1 1 auto;
 }
 
+.lend-main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: flex-start;
+}
+
 .option-box {
   padding: 5px 5px;
   border: solid 1px #ccc;

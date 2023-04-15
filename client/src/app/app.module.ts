@@ -18,6 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HeaderComponent } from './header/header.component';
 import { LendComponent } from './lend/lend.component';
@@ -51,7 +53,9 @@ import { LendResultComponent } from './lend-result/lend-result.component';
     MatSlideToggleModule,
     MatInputModule,
     MatFormFieldModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatListModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

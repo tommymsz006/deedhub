@@ -3,19 +3,11 @@
 }
 
 .header-box {
-  padding: 5px 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   box-sizing: border-box;
-}
-
-.item-form-field .mat-form-field-wrapper {
-  margin-bottom: -1.25em !important;
-}
-
-.item-form-field .mat-input-wrapper {
-  width: 1400px !important;
+  height: 90px;
 }

@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { DeedHubService } from '../deedhub.service';
 import { DisplayListing, DisplayLoanOffer } from '../entity';
-import { convertAmount, toReadableCurrency } from '../utils';
+import { convertAmount, toReadableCurrency, calculateAPR } from '../utils';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,8 +17,8 @@ export class LendResultComponent implements OnInit {
   listings: MatTableDataSource<DisplayListing>;
   selectedListing: DisplayListing | undefined;
   selectedLoanOffers: MatTableDataSource<DisplayLoanOffer>;
-  private readonly ACTUAL_COLUMNS: string[] = ['tokenId', 'highestOfferPrincipal', 'floorPrice', 'bestOfferPrice', 'valuation'];
-  private readonly LTV_COLUMNS: string[] = ['tokenId', 'highestOfferPrincipalLtv', 'floorPriceLtv', 'bestOfferPriceLtv', 'valuationLtv'];
+  private readonly ACTUAL_COLUMNS: string[] = ['tokenId', 'loanPlatform', 'desiredTerms', 'highestOfferPrincipal', 'floorPrice', 'bestOfferPrice', 'valuation'];
+  private readonly LTV_COLUMNS: string[] = ['tokenId', 'loanPlatform', 'desiredTerms', 'highestOfferPrincipalLtv', 'floorPriceLtv', 'bestOfferPriceLtv', 'valuationLtv'];
   displayColumns: string[];
 
   constructor(private deedHubService: DeedHubService,
@@ -51,6 +51,11 @@ export class LendResultComponent implements OnInit {
           tokenId: listing.tokenId,
           imageUrl: listing.imageUrl,
           loanPlatform: listing.loanPlatform,
+          desiredCurrency: listing.desiredCurrency,
+          desiredDuration: Number(listing.desiredDuration),
+          desiredPrincipal: listing.desiredPrincipal ? convertAmount(listing.desiredPrincipal, listing.desiredCurrency) : undefined,
+          desiredRepayment: listing.desiredRepayment ? convertAmount(listing.desiredRepayment, listing.desiredCurrency) : undefined,
+          desiredAPR: calculateAPR(listing.desiredRepayment, listing.desiredPrincipal, listing.desiredCurrency, listing.desiredDuration),
           highestOfferPrincipal: listing.highestOfferPrincipal ? convertAmount(listing.highestOfferPrincipal, 'WETH') : undefined,
           floorPrice: listing.floorPrice ? convertAmount(listing.floorPrice) : undefined,
           valuation: listing.valuation ? convertAmount(listing.valuation) : undefined,
@@ -62,12 +67,13 @@ export class LendResultComponent implements OnInit {
           loanOffers: listing.loanOffers.map(loanOffer => {
             console.log(loanOffer);
             return {
+              loanPlatform: loanOffer.loanPlatform,
               lender: loanOffer.lender.substring(2, 8),
               lenderUrl: `https://etherscan.io/address/${loanOffer.lender}`,
               currency: toReadableCurrency(loanOffer.currency),
               duration: Number(loanOffer.duration),
               principal: convertAmount(loanOffer.principal, loanOffer.currency) || 0,
-              apr: +((convertAmount(loanOffer.repayment, loanOffer.currency) - convertAmount(loanOffer.principal, loanOffer.currency)) * Number(loanOffer.duration) * 100 / 365).toFixed(2)
+              apr: calculateAPR(loanOffer.repayment, loanOffer.principal, loanOffer.currency, loanOffer.duration)
             };
           })
         })));

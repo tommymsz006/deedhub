@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -12,8 +12,7 @@ import { CollectionMetadata } from '../entity';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  encapsulation: ViewEncapsulation.None,  // this is to hide bottom part (i.e. hint)  of the material form field
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
 

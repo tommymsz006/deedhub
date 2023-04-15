@@ -21,6 +21,7 @@ export interface Listing {
 }
 
 export interface LoanOffer {
+  loanPlatform: string,
   lender: string,
   currency: string,
   duration: string,
@@ -32,6 +33,11 @@ export interface DisplayListing {
   tokenId: string,
   imageUrl: string,
   loanPlatform: string,
+  desiredCurrency: string | undefined,
+  desiredDuration: number | undefined,
+  desiredPrincipal: number | undefined,
+  desiredRepayment: number | undefined,
+  desiredAPR: number,
   highestOfferPrincipal: number | undefined,
   floorPrice: number | undefined,
   valuation: number | undefined,
@@ -44,6 +50,7 @@ export interface DisplayListing {
 }
 
 export interface DisplayLoanOffer {
+  loanPlatform: string,
   lender: string,
   lenderUrl: string,
   currency: string,

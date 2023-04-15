@@ -18,7 +18,7 @@ export class LendSearchComponent implements OnInit {
 
   ngOnInit(): void {
     const slug: string | null = this.route.snapshot.paramMap.get('slug');
-    console.log(slug);
+    //console.log(slug);
     if (slug) {
       this.deedHubService.getCollectionMetadataBySlug(slug).subscribe(collectionMetadata => {
         this.traits = {};

@@ -28,3 +28,9 @@ export function toReadableCurrency(currency: string) {
 
   return output;
 }
+
+export function calculateAPR(repayment: string | undefined, principal: string | undefined, currency: string | undefined, duration: string | undefined) {
+  return (repayment && principal && currency && duration) ?
+    +((convertAmount(repayment, currency) - convertAmount(principal, currency)) * Number(duration) * 100 / 365).toFixed(2) :
+    0;
+}
