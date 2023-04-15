@@ -20,6 +20,7 @@ const ASSET_CONTRACTS: string[] = [
   '0x8a90cab2b38dba80c64b7734e58ee1db38b8992e',   // doodles-official
   '0xba30e5f9bb24caa003e9f2f0497ad287fdf95623',   // bored-ape-kennel-club
   '0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7',   // meebits
+  '0xd774557b647330c91bf44cfeab205095f7e6c367',   // nakamigos
 ];
 const OUTPUT_FILE: string = './listings.json';
 
@@ -76,6 +77,7 @@ const main = async () => {
       for (const result of data.results) {
         if (result.terms.loan.currency === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2') {    // WETH
           listings[assetContract][i].loanOffers.push({
+            loanPlatform: 'NFTfi',
             lender: result.lender.address,
             currency: result.terms.loan.currency,
             duration: (result.terms.loan.duration / 86400).toString(), // 86400 = 24 * 60 * 60

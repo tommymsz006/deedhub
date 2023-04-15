@@ -14,6 +14,7 @@ export interface Listing {
 }
 
 export interface LoanOffer {
+  loanPlatform: string,
   lender: string,
   currency: string,
   duration: string,
