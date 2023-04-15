@@ -1,5 +1,9 @@
 export interface CollectionMetadata {
-  traits: any
+  traits: any,
+  slug: string,
+  stats: {
+    floor: number
+  }
 }
 
 export interface Offer {

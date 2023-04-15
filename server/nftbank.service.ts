@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export class OpenSeaService {
+export class NFTBankService {
 
   private _apiKey: string;
 
@@ -8,11 +8,10 @@ export class OpenSeaService {
     this._apiKey = apiKey;
   }
 
-  async getCollectionMetadata(slug: string) {
-    const response = await fetch(`https://api.opensea.io/api/v1/collection/${slug}`, {
+  async getValuation(assetContract: string, tokenId: string) {
+    const response = await fetch(`https://api.nftbank.run/v1/nft/${assetContract}/${tokenId}/estimate`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
         'x-api-key': this._apiKey
      }
     });
