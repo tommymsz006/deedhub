@@ -1,12 +1,16 @@
 <app-header></app-header>
 <mat-drawer-container>
-  <mat-drawer #drawer mode="side">
+  <mat-drawer #searchDrawer mode="side">
     <app-lend-search></app-lend-search>
   </mat-drawer>
   <mat-drawer-content class="content">
-    <button type="button" mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>{{drawer.opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}</mat-icon>
-    </button>
+    <div class="option-box">
+      <button type="button" mat-icon-button (click)="searchDrawer.toggle()">
+        <mat-icon>{{searchDrawer.opened ? 'arrow_back_ios' : 'arrow_forward_ios'}}</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <mat-slide-toggle>Actual / LTV</mat-slide-toggle>
+    </div>
     <app-lend-result></app-lend-result>
   </mat-drawer-content>
 </mat-drawer-container>

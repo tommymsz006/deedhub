@@ -2,14 +2,14 @@ import express, { Application, Request, Response, NextFunction, RequestHandler }
 import { HTTPS } from 'express-sslify';
 import cors from 'cors';
 
-import { NFTFI_SERVICE, OPENSEA_SERVICE, NFTBANK_SERVICE } from './constants';
-import { OpenSeaService } from './opensea.service';
-
 import { wrap } from './express-helper';
-
 import 'dotenv/config';
-import { NFTfiService } from './nftfi.service';
-import { NFTBankService } from './nftbank.service';
+
+import { NFTFI_SERVICE, OPENSEA_SERVICE, NFTBANK_SERVICE, CACHE_SERVICE } from './constants';
+import { OpenSeaService } from './opensea.service';
+import { CacheService } from './cache.service';
+//import { NFTfiService } from './nftfi.service';
+//import { NFTBankService } from './nftbank.service';
 import { Listing } from './entity';
 
 // express server related settings
@@ -39,8 +39,9 @@ function setupApp(): Application {
 
   // service setup
   app.set(OPENSEA_SERVICE, new OpenSeaService(process.env.OPENSEA_API_KEY || ''));
-  app.set(NFTFI_SERVICE, new NFTfiService(process.env.NFTFI_LISTINGS || '', process.env.NFTFI_API_KEY || ''));
-  app.set(NFTBANK_SERVICE, new NFTBankService(process.env.NFTBANK_API_KEY || ''));
+  app.set(CACHE_SERVICE, new CacheService(process.env.CACHE_LISTINGS || ''));
+//  app.set(NFTFI_SERVICE, new NFTfiService(process.env.NFTFI_LISTINGS || '', process.env.NFTFI_API_KEY || ''));
+//  app.set(NFTBANK_SERVICE, new NFTBankService(process.env.NFTBANK_API_KEY || ''));
 
   // allow POST to use JSON
   //app.use(express.urlencoded({ extended: false }));
@@ -55,6 +56,14 @@ function setupApp(): Application {
     response.send(data?.collection);
   }));
 
+  app.get('/api/listings', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
+    const service: CacheService = request.app.get(CACHE_SERVICE);
+    const assetContract: string = '0x34d85c9cdeb23fa97cb08333b511ac86e1c4e258';
+    const listings: Listing[] = await service.getListingsByCollection(assetContract);
+    response.send(listings);
+  }));
+
+  /*
   app.get('/api/listings', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
     const nftfi: NFTfiService = request.app.get(NFTFI_SERVICE);
     const nftBank: NFTBankService = request.app.get(NFTBANK_SERVICE);
@@ -79,7 +88,7 @@ function setupApp(): Application {
       valuation: nftBankData.data.estimate.eth
     });
   }));
-
+*/
   // error handling
   app.use((err: any, request: Request, response: Response, next: NextFunction) => {
     console.log(err);

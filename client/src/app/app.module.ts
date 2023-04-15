@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { HeaderComponent } from './header/header.component';
 import { LendComponent } from './lend/lend.component';
@@ -40,7 +41,8 @@ import { LendResultComponent } from './lend-result/lend-result.component';
     MatSidenavModule,
     MatExpansionModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

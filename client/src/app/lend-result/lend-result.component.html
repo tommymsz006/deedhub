@@ -1,33 +1,35 @@
 <div class="content">
   <mat-drawer-container>
+    <mat-drawer mode="side" position="end" opened>
+      <span>testing</span>
+    </mat-drawer>
     <mat-drawer-content class="content">
-      <table mat-table [dataSource]="offers" matSort class="mat-elevation-z8">
+      <table mat-table [dataSource]="listings" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="tokenId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.tokenId}} </td>
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="row-box"><img [src]="element.imageUrl" width=24>{{element.tokenId}}</div>
+          </td>
         </ng-container>
-        <ng-container matColumnDef="currency">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency </th>
-          <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+        <ng-container matColumnDef="highestOfferPrincipal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Highest Loan Offer</th>
+          <td mat-cell *matCellDef="let element"><div class="row-box"><img src="../../assets/eth_logo.png" width=16>{{element.highestOfferPrincipal}}</div></td>
         </ng-container>
-        <ng-container matColumnDef="duration">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
-          <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+        <ng-container matColumnDef="floorPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Floor Price</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="row-box"><img src="../../assets/eth_logo.png" width=16>{{element.floorPrice}}</div>
+          </td>
         </ng-container>
-        <ng-container matColumnDef="principal">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Principal </th>
-          <td mat-cell *matCellDef="let element"> {{element.principal}} </td>
+        <ng-container matColumnDef="valuation">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Valuation</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="row-box"><img src="../../assets/eth_logo.png" width=16>{{element.valuation}}</div>
+          </td>
         </ng-container>
-        <ng-container matColumnDef="repayment">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Repayment </th>
-          <td mat-cell *matCellDef="let element"> {{element.repayment}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="['tokenId', 'currency', 'duration', 'principal', 'repayment']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['tokenId', 'currency', 'duration', 'principal', 'repayment']"></tr>
+        <tr mat-header-row *matHeaderRowDef="['tokenId', 'highestOfferPrincipal', 'floorPrice', 'valuation']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['tokenId', 'highestOfferPrincipal', 'floorPrice', 'valuation']"></tr>
       </table>
     </mat-drawer-content>
-    <mat-drawer mode="side" position="end" opened>
-      testing
-    </mat-drawer>
   </mat-drawer-container>
 </div>

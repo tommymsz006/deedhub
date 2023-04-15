@@ -1,5 +1,6 @@
 export interface Listing {
   tokenId: string,
+  imageUrl: string,
   loanPlatform: string,
   desiredCurrency: string | undefined,
   desiredDuration: string | undefined,

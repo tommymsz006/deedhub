@@ -28,6 +28,7 @@ const main = async () => {
       }
       listings[listing.nftCollateralContract].push({
         tokenId: listing.nftCollateralId,
+        imageUrl: listing.imageUrl,
         loanPlatform: 'NFTfi',
         desiredCurrency: listing.desiredLoanCurrency,
         desiredDuration: listing.desiredLoanDuration,
@@ -72,6 +73,7 @@ const main = async () => {
             repayment: result.terms.loan.repayment.toLocaleString('fullwide', { useGrouping: false })
           });
           highestOfferPrincipal = result.terms.loan.principal > highestOfferPrincipal ? result.terms.loan.principal : highestOfferPrincipal;
+          console.log(highestOfferPrincipal);
         }
       }
       listings[assetContract][i].highestOfferPrincipal = highestOfferPrincipal.toLocaleString('fullwide', { useGrouping: false });

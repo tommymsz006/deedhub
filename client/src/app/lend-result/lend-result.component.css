@@ -8,15 +8,12 @@
   flex: 1 1 auto;
 }
 
-.item-box {
-  padding: 5px 5px;
-  border: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+.row-box {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   box-sizing: border-box;
-  background-color: white;
+  gap: 5px;
 }

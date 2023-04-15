@@ -1,0 +1,14 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.option-box {
+  padding: 5px 5px;
+  border: solid 1px #ccc;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}

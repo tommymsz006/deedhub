@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-import { CollectionMetadata, Offer } from './entity';
+import { CollectionMetadata, Listing } from './entity';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,10 @@ export class DeedHubService {
       );
   }
 
-  public getOffersByCollection(): Observable<Offer[]> {
-    return this.http.get<Offer[]>(`${environment.deedHubServiceUrl}/api/offers`,
+  public getListingsByCollection(): Observable<Listing[]> {
+    return this.http.get<Listing[]>(`${environment.deedHubServiceUrl}/api/listings`,
       {}).pipe(
-        catchError(DeedHubService.handleError<Offer[]>('getOffersByCollection'))
+        catchError(DeedHubService.handleError<Listing[]>('getListingsByCollection'))
       );
   }
 

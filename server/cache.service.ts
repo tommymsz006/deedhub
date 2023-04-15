@@ -5,11 +5,8 @@ import { Listing } from './entity';
 export class CacheService {
 
   private _listings: {[key: string]: Listing[]};
-  private _apiKey: string;
 
-  constructor(listingFile: string, apiKey: string) {
-    this._apiKey = apiKey;
-
+  constructor(listingFile: string) {
     this._listings = {};
 
     console.log(`Reading cache at ${listingFile}...`);
