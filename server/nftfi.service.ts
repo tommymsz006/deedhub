@@ -23,6 +23,7 @@ export class NFTfiService {
         }
         this._listings[listing.nftCollateralContract].push({
           tokenId: listing.nftCollateralId,
+          imageUrl: listing.imageUrl,
           loanPlatform: 'NFTfi',
           desiredCurrency: listing.desiredLoanCurrency,
           desiredDuration: listing.desiredLoanDuration,
@@ -31,6 +32,7 @@ export class NFTfiService {
           highestOfferPrincipal: undefined,
           floorPrice: undefined,
           valuation: undefined,
+          bestOfferPrice: undefined,
           loanOffers: []
         });
         count++;

@@ -5,7 +5,7 @@ import cors from 'cors';
 import { wrap } from './express-helper';
 import 'dotenv/config';
 
-import { NFTFI_SERVICE, OPENSEA_SERVICE, NFTBANK_SERVICE, CACHE_SERVICE } from './constants';
+import { OPENSEA_SERVICE, CACHE_SERVICE } from './constants';
 import { OpenSeaService } from './opensea.service';
 import { CacheService } from './cache.service';
 //import { NFTfiService } from './nftfi.service';
@@ -38,8 +38,9 @@ function setupApp(): Application {
   };
 
   // service setup
-  app.set(OPENSEA_SERVICE, new OpenSeaService(process.env.OPENSEA_API_KEY || ''));
-  app.set(CACHE_SERVICE, new CacheService(process.env.CACHE_LISTINGS || ''));
+  const cacheService: CacheService = new CacheService(process.env.CACHE_LISTINGS || '');
+  app.set(CACHE_SERVICE, cacheService);
+  app.set(OPENSEA_SERVICE, new OpenSeaService(process.env.OPENSEA_API_KEY || '', cacheService.getAllAssetContracts()));
 //  app.set(NFTFI_SERVICE, new NFTfiService(process.env.NFTFI_LISTINGS || '', process.env.NFTFI_API_KEY || ''));
 //  app.set(NFTBANK_SERVICE, new NFTBankService(process.env.NFTBANK_API_KEY || ''));
 
@@ -50,15 +51,23 @@ function setupApp(): Application {
   // enable CORS preflight
   app.options('/api/*', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions));
 
-  app.get('/api/collection', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
+  app.get('/api/collections', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
     const service: OpenSeaService = request.app.get(OPENSEA_SERVICE);
-    const data: any =  await service.getCollectionMetadata('otherdeed');
+    const data: any =  await service.getAllCollectionMetadata();
+    //console.log(data);
+    response.send(data?.collections);
+  }));
+
+  app.get('/api/collection/:slug', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
+    const service: OpenSeaService = request.app.get(OPENSEA_SERVICE);
+    const data: any =  await service.getCollectionMetadataBySlug(request.params.slug);
     response.send(data?.collection);
   }));
 
-  app.get('/api/listings', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
+  app.get('/api/collection/:slug/listings', (cors as (options: cors.CorsOptions) => RequestHandler)(corsOptions), wrap(async(request: Request, response: Response, next: NextFunction) => {
+    const openSea: OpenSeaService = request.app.get(OPENSEA_SERVICE); 
+    const assetContract: string = openSea.getAssetContractBySlug(request.params.slug); 
     const service: CacheService = request.app.get(CACHE_SERVICE);
-    const assetContract: string = '0x34d85c9cdeb23fa97cb08333b511ac86e1c4e258';
     const listings: Listing[] = await service.getListingsByCollection(assetContract);
     response.send(listings);
   }));

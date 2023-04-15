@@ -9,6 +9,7 @@ export interface Listing {
   highestOfferPrincipal: string | undefined,
   floorPrice: string | undefined,
   valuation: string | undefined,
+  bestOfferPrice: string | undefined,
   loanOffers: LoanOffer[]
 }
 

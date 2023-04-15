@@ -18,6 +18,10 @@ export class CacheService {
     console.log(`${listingCount} listing(s) loaded across ${Object.keys(this._listings).length} collection(s)`);
   }
 
+  getAllAssetContracts(): string[] {
+    return Object.keys(this._listings);
+  }
+
   async getListingsByCollection(assetContract: string): Promise<Listing[]> {
     return this._listings[assetContract];
   }
