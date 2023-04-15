@@ -74,6 +74,7 @@ export class NFTfiService {
       let highestOfferPrincipal: number = 0;
       for (const result of data.results) {
         listings[i].loanOffers.push({
+          loanPlatform: 'NFTfi',
           lender: result.lender.address,
           currency: result.terms.loan.currency,
           duration: (result.terms.loan.duration / 86400).toString(), // 86400 = 24 * 60 * 60
