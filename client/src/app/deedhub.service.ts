@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-import { CollectionMetadata } from './entity';
+import { CollectionMetadata, Offer } from './entity';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,16 @@ export class DeedHubService {
   constructor(private http: HttpClient) { }
 
   public getCollectionMetadata(): Observable<CollectionMetadata> {
-    //console.log(`${environment.tesseractServiceUrl}/api/v3/list/models`);
     return this.http.get<CollectionMetadata>(`${environment.deedHubServiceUrl}/api/collection`,
       {}).pipe(
         catchError(DeedHubService.handleError<CollectionMetadata>('getCollectionMetadata'))
+      );
+  }
+
+  public getOffersByCollection(): Observable<Offer[]> {
+    return this.http.get<Offer[]>(`${environment.deedHubServiceUrl}/api/offers`,
+      {}).pipe(
+        catchError(DeedHubService.handleError<Offer[]>('getOffersByCollection'))
       );
   }
 

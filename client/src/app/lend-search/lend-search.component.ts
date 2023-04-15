@@ -9,10 +9,9 @@ import { DeedHubService } from '../deedhub.service';
 })
 export class LendSearchComponent implements OnInit {
 
-  traits: {[key: string]: string[]};
+  traits: {[key: string]: string[]} = {};
 
   constructor(private deedHubService: DeedHubService) {
-    this.traits = {};
   }
 
   ngOnInit(): void {
@@ -24,8 +23,6 @@ export class LendSearchComponent implements OnInit {
           this.traits[trait].push(traitValue);
         }
       }
-
-      console.log(this.traits);
     });
   }
 

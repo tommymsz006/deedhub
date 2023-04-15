@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { HeaderComponent } from './header/header.component';
 import { LendComponent } from './lend/lend.component';
@@ -36,7 +38,9 @@ import { LendResultComponent } from './lend-result/lend-result.component';
     MatButtonModule,
     MatMenuModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
